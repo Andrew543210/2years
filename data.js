@@ -5,7 +5,6 @@ export const cute = [
   "img/cute/photo_12_2025-11-11_15-15-52.jpg",
   "img/cute/photo_13_2025-11-11_15-15-52.jpg",
   "img/cute/photo_14_2025-11-11_15-15-52.jpg",
-  "img/cute/photo_15_2025-11-11_15-15-52.jpg",
   "img/cute/photo_16_2025-11-11_15-15-52.jpg",
   "img/cute/photo_17_2025-11-11_15-15-52.jpg",
   "img/cute/photo_18_2025-11-11_15-15-52.jpg",

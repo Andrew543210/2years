@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>2 роки разом — Головна</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Partial hero will be loaded here -->
+  <div id="hero-root"></div>
+
+  <main id="story">
+    <h2 style="margin-top:0;">Наша історія</h2>
+    <p>Тут почнеться розповідь... (замініть на реальний контент)</p>
+  </main>
+
+  <script>
+    // Завантажуємо partial `hero.html` та вставляємо в сторінку
+    (async function loadHero(){
+      try{
+        const res = await fetch('hero.html');
+        if(!res.ok) throw new Error('Не вдалося завантажити hero.html');
+        const html = await res.text();
+        document.getElementById('hero-root').innerHTML = html;
+      }catch(err){
+        console.warn(err);
+        // У випадку помилки — вставляємо простий запасний блок
+        document.getElementById('hero-root').innerHTML = `\n<section class="hero" aria-label="Герой — 2 роки разом">\n  <div class="hero__content">\n    <h1 class="hero__title">2 роки разом</h1>\n    <p class="hero__subtitle">Це наша історія</p>\n    <div class="hero__actions">\n      <a class="btn" href="#story" role="button">Переглянути історію</a>\n    </div>\n  </div>\n</section>`;
+      }
+    })();
+  </script>
+</body>
+</html>
