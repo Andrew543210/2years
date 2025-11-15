@@ -32,13 +32,8 @@
     return String(n).padStart(2,'0');
   }
 
-  function markNew(el){
-    if(!el) return;
-    el.classList.remove('is-new');
-    void el.offsetWidth; // force reflow
-    el.classList.add('is-new');
-    setTimeout(()=> el.classList.remove('is-new'), 700);
-  }
+  // Відключаємо анімацію зміни цифр
+  function markNew(el){ /* no animation */ }
 
   function update(){
     const now = new Date();
@@ -58,22 +53,18 @@
 
     if(p.days !== prev.d){
       elDays.textContent = formatNumber(p.days);
-      markNew(elDays);
       prev.d = p.days;
     }
     if(p.hours !== prev.h){
       elHours.textContent = formatNumber(p.hours);
-      markNew(elHours);
       prev.h = p.hours;
     }
     if(p.minutes !== prev.m){
       elMinutes.textContent = formatNumber(p.minutes);
-      markNew(elMinutes);
       prev.m = p.minutes;
     }
     if(p.seconds !== prev.s){
       elSeconds.textContent = formatNumber(p.seconds);
-      markNew(elSeconds);
       prev.s = p.seconds;
     }
   }

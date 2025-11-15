@@ -1,0 +1,25 @@
+// index.js — підвантаження partials та імпорт логіки лічильника
+
+// Підвантаження partial hero
+async function loadPartial(id, url, fallbackHtml) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Не вдалося завантажити ' + url);
+    const html = await res.text();
+    document.getElementById(id).innerHTML = html;
+    return true;
+  } catch (err) {
+    console.warn(err);
+    document.getElementById(id).innerHTML = fallbackHtml;
+    return false;
+  }
+}
+
+// Завантажити hero
+loadPartial('hero-root', 'hero.html', `\n<section class="hero" aria-label="Герой — 2 роки разом">\n  <div class="hero__content">\n    <h1 class="hero__title">2 роки разом</h1>\n    <p class="hero__subtitle">Це наша історія</p>\n    <div class="hero__actions">\n      <a class="btn" href="#story" role="button">Переглянути історію</a>\n    </div>\n  </div>\n</section>`);
+
+// Завантажити counter і після вставки імпортувати логіку
+loadPartial('counter-root', 'partials/counter.html', `<section class='counter'><div>Лічильник недоступний</div></section>`)
+  .then(() => {
+    import('./partials/counter.js').catch(e => console.warn('counter.js import error', e));
+  });

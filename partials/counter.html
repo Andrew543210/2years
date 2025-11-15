@@ -32,18 +32,18 @@
 
   <style>
     /* Змінні: налаштуй тут кольори та поведінку */
-    :root{
-      --accent: #ffffff; /* колір цифр і символу */
-      --muted: rgba(255,255,255,0.85); /* колір підписів */
-      --bg: rgba(0,0,0,0.5); /* фон контейнера */
-      --glass-border: rgba(255, 255, 255, 0.582); /* рамка клітинок */
-      --cell-bg:  rgba(234, 191, 105, 0.5); /* ОДИНАКОВИЙ фон для всіх клітинок */
-      --radius: 12px;
-      --gap: 1rem;
-      --cell-radius: 10px;
-      --infty-anim-duration: 4s;
-      --font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    }
+   :root{
+  --accent: #1F2937; /* темний для кращого контрасту на світлому фоні */
+  --muted: rgba(31,41,55,0.7);
+  --bg: rgba(255,245,238,0.6); /* дуже світлий персиковий фон */
+  --glass-border: rgba(31,41,55,0.06);
+  --cell-bg: rgba(255,255,255,0.85); /* світлі клітинки для чистого вигляду */
+  --radius: 12px;
+  --gap: 1rem;
+  --cell-radius: 10px;
+  --infty-anim-duration: 4s;
+  --font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
 
     /* Базова стилізація контейнера (partial має виглядати самодостатньо) */
     .counter{
