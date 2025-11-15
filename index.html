@@ -10,9 +10,11 @@
   <!-- Partial hero will be loaded here -->
   <div id="hero-root"></div>
 
+  <!-- Partial counter will be loaded here -->
+  <div id="counter-root"></div>
+
   <main id="story">
-    <h2 style="margin-top:0;">Наша історія</h2>
-    <p>Тут почнеться розповідь... (замініть на реальний контент)</p>
+   
   </main>
 
   <script>
@@ -25,8 +27,20 @@
         document.getElementById('hero-root').innerHTML = html;
       }catch(err){
         console.warn(err);
-        // У випадку помилки — вставляємо простий запасний блок
         document.getElementById('hero-root').innerHTML = `\n<section class="hero" aria-label="Герой — 2 роки разом">\n  <div class="hero__content">\n    <h1 class="hero__title">2 роки разом</h1>\n    <p class="hero__subtitle">Це наша історія</p>\n    <div class="hero__actions">\n      <a class="btn" href="#story" role="button">Переглянути історію</a>\n    </div>\n  </div>\n</section>`;
+      }
+    })();
+
+    // Завантажуємо partial `counter.html` та вставляємо в сторінку
+    (async function loadCounter(){
+      try{
+        const res = await fetch('partials/counter.html');
+        if(!res.ok) throw new Error('Не вдалося завантажити counter.html');
+        const html = await res.text();
+        document.getElementById('counter-root').innerHTML = html;
+      }catch(err){
+        console.warn(err);
+        document.getElementById('counter-root').innerHTML = `<section class='counter'><div>Лічильник недоступний</div></section>`;
       }
     })();
   </script>
