@@ -1,7 +1,6 @@
 export const cute = [
   "img/cute/photo_10_2025-11-11_15-15-52.jpg",
   "img/cute/photo_10_2025-11-11_15-16-06.jpg",
-  "img/cute/photo_11_2025-11-11_15-15-52.jpg",
   "img/cute/photo_12_2025-11-11_15-15-52.jpg",
   "img/cute/photo_13_2025-11-11_15-15-52.jpg",
   "img/cute/photo_14_2025-11-11_15-15-52.jpg",
@@ -42,7 +41,6 @@ export const cute = [
   "img/cute/photo_44_2025-11-11_15-15-52.jpg",
   "img/cute/photo_45_2025-11-11_15-15-52.jpg",
   "img/cute/photo_46_2025-11-11_15-15-52.jpg",
-  "img/cute/photo_47_2025-11-11_15-15-52.jpg",
   "img/cute/photo_48_2025-11-11_15-15-52.jpg",
   "img/cute/photo_49_2025-11-11_15-15-52.jpg",
   "img/cute/photo_4_2025-11-11_15-15-52.jpg",
@@ -61,7 +59,6 @@ export const cute = [
   "img/cute/photo_5_2025-11-11_15-16-06.jpg",
   "img/cute/photo_60_2025-11-11_15-15-52.jpg",
   "img/cute/photo_61_2025-11-11_15-15-52.jpg",
-  "img/cute/photo_62_2025-11-11_15-15-52.jpg",
   "img/cute/photo_63_2025-11-11_15-15-52.jpg",
   "img/cute/photo_64_2025-11-11_15-15-52.jpg",
   "img/cute/photo_65_2025-11-11_15-15-52.jpg",

@@ -23,3 +23,11 @@ loadPartial('counter-root', 'partials/counter.html', `<section class='counter'><
   .then(() => {
     import('./partials/counter.js').catch(e => console.warn('counter.js import error', e));
   });
+
+// Завантажити event-calendar
+loadPartial('event-calendar-root', 'partials/event-calendar.html', `<section class='event-calendar'><div>Календар недоступний</div></section>`)
+  .then(() => {
+    import('./partials/event-calendar.js')
+      .then(module => module.initEventCalendar(module.cute))
+      .catch(e => console.warn('event-calendar.js import error', e));
+  });
