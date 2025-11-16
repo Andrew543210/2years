@@ -1,22 +1,24 @@
 <!-- event-calendar.html (partial) — календар з грід-сіткою -->
 <section class="event-calendar" aria-label="Іvent календар">
   <div class="event-calendar__container">
-    <!-- Заголовок та навігація -->
+    <!-- Заголовок -->
     <div class="event-calendar__header">
-      <h2 class="event-calendar__title">Галерея</h2>
-      <div class="event-calendar__nav">
-        <button class="event-calendar__btn-prev" aria-label="Попередня сторінка">
-          <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-        </button>
-        <span class="event-calendar__page-info" aria-live="polite" aria-atomic="true">Page 1 of 7</span>
-        <button class="event-calendar__btn-next" aria-label="Наступна сторінка">
-          <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
-      </div>
+      <h2 class="event-calendar__title">Event-calendar наших спогадів</h2>
+    </div>
+
+    <!-- Навігація з індикатором посередині -->
+    <div class="event-calendar__controls">
+      <button class="event-calendar__btn-prev" aria-label="Попередня сторінка">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <span class="event-calendar__page-info" aria-live="polite" aria-atomic="true">Сторінка 1 з 8</span>
+      <button class="event-calendar__btn-next" aria-label="Наступна сторінка">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
     </div>
 
     <!-- Грід з елементами -->
@@ -75,15 +77,19 @@
     .event-calendar__title {
       font-size: 1.875rem;
       font-weight: 700;
-      color: #1f2937;
-      margin: 0;
+      color: var(--ec-accent);
+      margin: 0 auto;
+      text-align: center;
+      letter-spacing: 0.5px;
     }
 
-    /* Navigation */
-    .event-calendar__nav {
+    /* Controls (Navigation with centered page info) */
+    .event-calendar__controls {
       display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 1rem;
+      gap: 2rem;
+      margin-bottom: 2rem;
     }
 
     .event-calendar__btn-prev,
@@ -121,10 +127,10 @@
     }
 
     .event-calendar__page-info {
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 600;
-      color: #4b5563;
-      min-width: 120px;
+      color: #1f2937;
+      min-width: 150px;
       text-align: center;
     }
 
@@ -175,7 +181,30 @@
       transform: scale(1.15);
     }
 
-    /* Modal */
+    /* Item opened state */
+    .event-calendar__item.is-opened {
+      background: #d1d5db;
+      cursor: default;
+    }
+
+    .event-calendar__item.is-opened::after {
+      content: 'Момент згадано 💕';
+      position: absolute;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #374151;
+      text-align: center;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      line-height: 1.3;
+      padding: 0.5rem;
+    }
+
+    .event-calendar__item.is-opened .event-calendar__heart {
+      opacity: 0.3;
+    }
     .event-calendar__modal {
       display: none;
       position: fixed;
@@ -208,7 +237,7 @@
       border-radius: 16px;
       max-width: 90vw;
       max-height: 90vh;
-      overflow: auto;
+      overflow: visible; /* прибираємо внутрішній скрол */
       box-shadow: var(--ec-shadow-lg);
       display: flex;
       flex-direction: column;
@@ -216,30 +245,45 @@
       justify-content: center;
       margin: auto;
       animation: slideIn 0.3s ease;
+      padding: 0; /* медіа має контролювати відступи */
     }
 
     .event-calendar__modal-close {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: rgba(0, 0, 0, 0.1);
+      top: -22px; /* ще вище за межами контенту */
+      right: -32px; /* занесено правіше, щоб не заходив на контент */
+      background: var(--ec-accent); /* червоне коло */
       border: none;
-      width: 40px;
-      height: 40px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #1f2937;
+      color: #ffffff; /* хрестик білий */
       transition: all var(--ec-transition);
-      z-index: 1002;
+      z-index: 1200; /* вище за контент */
       padding: 0;
+      box-shadow: 0 8px 26px rgba(0,0,0,0.18);
     }
 
     .event-calendar__modal-close:hover {
-      background: rgba(0, 0, 0, 0.2);
-      transform: scale(1.1);
+      background: #dc2626;
+      transform: scale(1.06);
+    }
+
+    /* На мобільних хрестик повинен бути усередині, щоб не злазити за межі екрану */
+    @media (max-width: 640px) {
+      .event-calendar__modal-close {
+        top: 12px;
+        right: 12px;
+        background: rgba(0,0,0,0.08);
+        color: #1f2937;
+        width: 40px;
+        height: 40px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+      }
     }
 
     .event-calendar__modal-media {
@@ -303,7 +347,7 @@
       }
 
       .event-calendar__page-info {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
       }
     }
 
@@ -322,6 +366,11 @@
         font-size: 1.25rem;
       }
 
+      .event-calendar__controls {
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
       .event-calendar__btn-prev,
       .event-calendar__btn-next {
         width: 36px;
@@ -332,6 +381,11 @@
       .event-calendar__btn-next svg {
         width: 20px;
         height: 20px;
+      }
+
+      .event-calendar__page-info {
+        font-size: 0.9rem;
+        min-width: 130px;
       }
 
       .event-calendar__heart {
@@ -362,11 +416,21 @@
 
       .event-calendar__page-info {
         font-size: 0.8rem;
-        min-width: 100px;
+        min-width: 110px;
       }
 
-      .event-calendar__header {
+      .event-calendar__controls {
         gap: 0.75rem;
+      }
+
+      .event-calendar__btn-prev,
+      .event-calendar__btn-next {
+        width: 32px;
+        height: 32px;
+      }
+
+      .event-calendar__item.is-opened::after {
+        font-size: 0.75rem;
       }
     }
 

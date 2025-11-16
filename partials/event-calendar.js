@@ -20,6 +20,10 @@ export function initEventCalendar(items) {
   let currentPage = 0;
   const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
 
+  // Очищуємо localStorage при завантаженні (всі спогади стають нетакими)
+  localStorage.removeItem('openedMemories');
+  const openedMemories = [];
+
   // SVG Heart inline
   const heartSvg = `<svg class="event-calendar__heart" viewBox="0 0 24 24" aria-hidden="true">
     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
@@ -36,7 +40,17 @@ export function initEventCalendar(items) {
       div.className = 'event-calendar__item';
       div.setAttribute('role', 'gridcell');
       div.innerHTML = heartSvg;
-      div.addEventListener('click', () => openModal(item));
+
+      // Перевіряємо, чи цей спогад вже розкритий
+      if (openedMemories.includes(item)) {
+        div.classList.add('is-opened');
+      }
+
+      div.addEventListener('click', () => {
+        if (!div.classList.contains('is-opened')) {
+          openModal(item, div);
+        }
+      });
       GRID.appendChild(div);
     }
 
@@ -45,7 +59,7 @@ export function initEventCalendar(items) {
   }
 
   function updatePageInfo() {
-    PAGE_INFO.textContent = `Page ${currentPage + 1} of ${totalPages}`;
+    PAGE_INFO.textContent = `Сторінка ${currentPage + 1} з ${totalPages}`;
   }
 
   function updateNavigation() {
@@ -53,7 +67,7 @@ export function initEventCalendar(items) {
     BTN_NEXT.disabled = currentPage === totalPages - 1;
   }
 
-  function openModal(item) {
+  function openModal(item, itemElement) {
     MODAL_MEDIA.innerHTML = '';
     const isVideo = item.endsWith('.mp4');
 
@@ -73,6 +87,17 @@ export function initEventCalendar(items) {
     MODAL.classList.add('is-active');
     MODAL.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+
+    // Додаємо спогад до списку розкритих
+    if (!openedMemories.includes(item)) {
+      openedMemories.push(item);
+      localStorage.setItem('openedMemories', JSON.stringify(openedMemories));
+
+      // Оновлюємо стан ячейки
+      if (itemElement) {
+        itemElement.classList.add('is-opened');
+      }
+    }
   }
 
   function closeModal() {
