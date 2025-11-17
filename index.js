@@ -33,3 +33,13 @@ loadPartial('event-calendar-root', 'partials/event-calendar.html', `<section cla
     initEventCalendar(cute);
   })
   .catch(e => console.warn('event-calendar.js import error', e));
+
+// Завантажити partial "Генератор смішних спогадів"
+loadPartial('funny-generator-root', 'partials/funny-generator.html', `<section class='funny-generator'><div>Генератор недоступний</div></section>`)
+  .then(() => {
+    return import('./partials/funny-generator.js');
+  })
+  .then(({ funny, initFunnyGenerator }) => {
+    initFunnyGenerator(funny);
+  })
+  .catch(e => console.warn('funny-generator.js import error', e));

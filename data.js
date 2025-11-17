@@ -189,6 +189,12 @@ export const funny = [
   "img/funny/photo_7_2025-11-11_14-52-28.jpg",
   "img/funny/photo_8_2025-11-11_14-52-28.jpg",
   "img/funny/photo_9_2025-11-11_14-52-28.jpg"
+  ,
+  // Нові відео для генератора смішних спогадів
+  "img/funny/video_2025-11-17_15-48-07.mp4",
+ "img/funny/video_2025-11-17_15-48-17.mp4",
+  "img/funny/video_2025-11-17_15-48-22.mp4",
+  "img/funny/video_2025-11-17_15-48-26.mp4"
 ];
 
 export const legendary = [

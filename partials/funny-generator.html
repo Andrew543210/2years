@@ -1,0 +1,45 @@
+<!-- funny-generator.html (partial) — Генератор смішних спогадів -->
+<section class="funny-generator" aria-label="Генератор смішних спогадів">
+  <div class="funny-generator__container">
+    <header class="funny-generator__header">
+      <h2 class="funny-generator__title">Генератор смішних спогадів</h2>
+      <button class="funny-generator__btn" type="button" aria-label="Усміхнись">Усміхнись</button>
+    </header>
+
+    <div class="funny-generator__result" aria-live="polite" aria-atomic="true"></div>
+  </div>
+
+  <style>
+    :root{
+      --fg-accent: #dc2121; /* purple */
+      --fg-accent-2: #34a341; /* teal */
+      --fg-card: linear-gradient(90deg, rgba(255,255,255,0.9), rgba(250,250,255,0.96));
+      --fg-shadow: 0 12px 30px rgba(16,24,40,0.08);
+      --fg-radius: 14px;
+      --fg-gap: 1rem;
+    }
+
+    .funny-generator{ width:100%; padding: clamp(1rem,2.5vw,2rem); box-sizing:border-box; }
+    .funny-generator__container{ max-width:1100px; margin:0 auto; background:var(--fg-card); padding:1.25rem; border-radius:var(--fg-radius); box-shadow:var(--fg-shadow); border:1px solid rgba(124,58,237,0.06); }
+
+    .funny-generator__header{ display:flex; gap:var(--fg-gap); align-items:center; justify-content:space-between; margin-bottom:1rem; }
+    .funny-generator__title{ margin:0; color:var(--fg-accent); font-size:1.375rem; font-weight:800; letter-spacing:0.2px; }
+
+    .funny-generator__btn{ background: linear-gradient(90deg,var(--fg-accent),var(--fg-accent-2)); color:#fff; border:none; padding:.65rem 1rem; border-radius:10px; cursor:pointer; font-weight:800; box-shadow: 0 8px 20px rgba(99,102,241,0.12); transition: transform .18s ease, box-shadow .18s ease; }
+    .funny-generator__btn:hover{ transform: translateY(-3px); box-shadow: 0 18px 40px rgba(99,102,241,0.14); }
+    .funny-generator__btn:active{ transform: translateY(0); }
+
+    .funny-generator__result{ min-height:220px; display:flex; align-items:center; justify-content:center; border-radius:12px; background:linear-gradient(180deg,#ffffff, #fbfdff); padding:1rem; position:relative; overflow:hidden; }
+    .funny-generator__media{ max-width:100%; max-height:60vh; border-radius:10px; box-shadow: 0 10px 30px rgba(16,24,40,0.06); display:block; opacity:0; transform: translateY(6px) scale(.995); transition: opacity .35s ease, transform .35s cubic-bezier(.2,.9,.2,1); }
+    .funny-generator__media.is-new{ opacity:1; transform: translateY(0) scale(1); }
+
+    .funny-generator__hint{ color:#6b7280; font-size:.98rem; }
+
+    .fg-play-overlay{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); pointer-events:none; width:84px; height:84px; border-radius:50%; background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.7)); display:flex; align-items:center; justify-content:center; box-shadow: 0 8px 26px rgba(2,6,23,0.08); opacity:0; transition: opacity .2s ease; }
+    .funny-generator__result.has-video .fg-play-overlay{ opacity:1; }
+
+    .fg-play-icon{ width:34px; height:34px; display:inline-block; color:var(--fg-accent); }
+
+    @media (max-width:640px){ .funny-generator__header{ flex-direction:column; align-items:stretch; } .funny-generator__btn{ width:100%; } .funny-generator__result{ min-height:160px; } }
+  </style>
+</section>
