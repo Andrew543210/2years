@@ -43,3 +43,13 @@ loadPartial('funny-generator-root', 'partials/funny-generator.html', `<section c
     initFunnyGenerator(funny);
   })
   .catch(e => console.warn('funny-generator.js import error', e));
+
+// Завантажити partial "Our Vibes"
+loadPartial('our-vibes-root', 'partials/our-vibes.html', `<section class='our-vibes'><div>Our Vibes недоступні</div></section>`)
+  .then(() => {
+    return import('./partials/our-vibes.js');
+  })
+  .then(({ vibes, initOurVibes }) => {
+    initOurVibes(vibes);
+  })
+  .catch(e => console.warn('our-vibes.js import error', e));

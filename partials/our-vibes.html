@@ -1,0 +1,33 @@
+<!-- our-vibes.html (partial) — Сітка відео "Our Vibes" -->
+<section class="our-vibes" aria-label="Our Vibes">
+  <div class="our-vibes__container">
+    <header class="our-vibes__header">
+      <h2 class="our-vibes__title">Our Vibes</h2>
+    </header>
+
+    <div class="our-vibes__grid" aria-live="polite" aria-atomic="true">
+      <!-- Grid items будуть згенеровані через JS -->
+    </div>
+  </div>
+
+  <style>
+    .our-vibes{ width:100%; padding: clamp(0.75rem,2.5vw,1.5rem); box-sizing:border-box; }
+    .our-vibes__container{ max-width:1200px; margin:0 auto; }
+    .our-vibes__header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:.75rem; }
+    .our-vibes__title{ margin:0; font-size:1.25rem; font-weight:800; color:#111827; }
+
+    .our-vibes__grid{ display:grid; grid-template-columns: repeat(5, 1fr); grid-auto-rows: clamp(80px, 9vw, 140px); gap:4px; }
+    .our-vibes__item{ width:100%; height:100%; overflow:hidden; position:relative; display:block; border-radius:4px; }
+    .our-vibes__item video{ width:100%; height:100%; object-fit:cover; display:block; border-radius:4px; filter: blur(6px) saturate(.95); transition: filter .18s ease, transform .18s ease; transform: scale(1.02); }
+    .our-vibes__item:focus{ outline: 3px solid rgba(59,130,246,0.12); }
+    .our-vibes__item .our-vibes__overlay{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+    .our-vibes__play-hint{ pointer-events:none; width:44px; height:44px; border-radius:50%; background: rgba(255,255,255,0.45); display:flex; align-items:center; justify-content:center; box-shadow:0 6px 18px rgba(2,6,23,0.06); }
+
+    /* Fullscreen wrapper styles (inserted by JS) */
+    .our-vibes__fs-wrapper{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background: rgba(0,0,0,0.8); z-index:9999; }
+    .our-vibes__fs-video{ width:100%; height:100%; max-width:100%; max-height:100%; object-fit:contain; background:#000; }
+
+    @media (max-width:900px){ .our-vibes__grid{ grid-template-columns: repeat(4, 1fr); } }
+    @media (max-width:640px){ .our-vibes__grid{ grid-template-columns: repeat(2, 1fr); } .our-vibes__title{ font-size:1.05rem; } }
+  </style>
+</section>
