@@ -1,0 +1,45 @@
+<!-- music-player.html (partial) -->
+<div class="music-player-block">
+  <h2 class="music-player__title">Our music player</h2>
+  <section class="music-player" aria-label="Музичний плеєр">
+    <div class="music-player__container">
+      <div class="music-player__display">
+      <div class="music-player__current-song" id="currentSongDisplay">
+        <span class="music-player__song-title">Натисніть Play</span>
+      </div>
+      <div class="music-player__time">
+        <span class="music-player__current-time" id="currentTime">0:00</span>
+        <div class="music-player__progress-bar">
+          <div class="music-player__progress" id="progressBar"></div>
+        </div>
+        <span class="music-player__duration" id="duration">0:00</span>
+      </div>
+    </div>
+
+    <div class="music-player__controls">
+      <button class="music-player__btn music-player__btn--prev" id="prevBtn" aria-label="Попередня пісня">
+        <svg width="24" height="24" viewBox="0 0 24 24" style="background:#fff; border-radius:50%;">
+          <path fill="#d32f2f" d="M6 6h2v12H6V6zm3.5 6l8.5 6V6l-8.5 6z"/>
+        </svg>
+      </button>
+
+      <button class="music-player__btn music-player__btn--play" id="playBtn" aria-label="Грати/Пауза">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="#d32f2f" id="playIcon" style="background:#fff; border-radius:50%;">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="#fff" id="pauseIcon" style="display:none; background:#d32f2f; border-radius:50%;">
+          <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+        </svg>
+      </button>
+
+      <button class="music-player__btn music-player__btn--next" id="nextBtn" aria-label="Наступна пісня">
+        <svg width="24" height="24" viewBox="0 0 24 24" style="transform: scaleX(-1); background:#fff; border-radius:50%;">
+          <path fill="#d32f2f" d="M6 6h2v12H6V6zm3.5 6l8.5 6V6l-8.5 6z"/>
+        </svg>
+      </button>
+    </div>
+
+    <audio id="audioPlayer" preload="none"></audio>
+    </div>
+  </section>
+</div>

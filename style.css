@@ -22,3 +22,110 @@ main{
 
 /* Link focus styles for accessibility */
 a:focus{ outline: 3px solid rgba(21,156,228,0.18); outline-offset:3px; }
+
+/* Music Player Styles */
+.music-player-block {
+  max-width: 560px;
+  margin: 0 auto 1.25rem auto;
+  padding: 0 1rem;
+}
+
+.music-player__title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #d32f2f;
+  margin: 0 0 0.5rem 0;
+  text-align: center;
+}
+
+.music-player {
+  display: flex;
+  justify-content: center;
+  background: #fff;
+  border-radius: 12px;
+  padding: 0.4rem 0.6rem; /* компактніший — висота менша вдвічі */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.music-player__container {
+  width: 100%;
+  max-width: 520px;
+}
+
+.music-player__display {
+  text-align: center;
+  margin-bottom: 0.6rem;
+}
+
+.music-player__current-song {
+  margin-bottom: 0.4rem;
+}
+
+.music-player__song-title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #333;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 0.5rem;
+}
+
+.music-player__time {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0.4rem 0;
+}
+
+.music-player__progress-bar {
+  flex: 1;
+  height: 4px;
+  background: #eee;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.music-player__progress-bar:hover { height: 6px; }
+
+.music-player__progress {
+  height: 100%;
+  background: rgba(211,47,47,0.8); /* червона зі прозорістю 0.8 */
+  width: 0%;
+  transition: width 0.12s linear;
+}
+
+.music-player__duration,
+.music-player__current-time { min-width: 2.5rem; text-align: center; }
+
+.music-player__controls { display:flex; align-items:center; justify-content:center; gap: 0.9rem; }
+
+.music-player__btn { background: none; border: none; padding: 0; cursor: pointer; display:flex; align-items:center; justify-content:center; }
+
+/* svg backgrounds white by default (pause icon overrides inline) */
+.music-player__btn svg { background: #fff; border-radius: 50%; display:block; }
+
+/* prev/next small buttons */
+.music-player__btn--prev svg,
+.music-player__btn--next svg { width: 34px; height: 34px; color: #333; }
+
+/* Play button — червоно-біла */
+.music-player__btn--play { width: 44px; height: 44px; display:inline-grid; place-items:center; border-radius:50%; background:#fff; border:2px solid #d32f2f; }
+.music-player__btn--play svg { width: 28px; height: 28px; }
+
+.music-player__btn--play:active { transform: scale(0.98); }
+
+@media (max-width:600px) {
+  .music-player-block { padding: 0 0.5rem; }
+  .music-player { padding: 0.3rem 0.4rem; }
+  .music-player__btn--prev svg, .music-player__btn--next svg { width: 28px; height: 28px; }
+  .music-player__btn--play { width: 36px; height: 36px; }
+  .music-player__song-title { font-size: 0.8rem; }
+}
+
+

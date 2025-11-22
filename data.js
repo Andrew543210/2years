@@ -250,3 +250,16 @@ export const vibes = [
   "img/vibes/video_2025-11-11_21-35-21.mp4"
 ];
 
+export const musicPlayer = [
+  "audio/Elarm - Hop.mp3",
+  "audio/Studio Killers - Jenny.mp3",
+  "audio/Yaktak - Силует.mp3",
+  "audio/Baby Keem - 16.mp3",
+  "audio/Boombox - Стяги на стяги.mp3",
+  "audio/Golubenko - Станції.mp3",
+  "audio/jockiidruce - payka-stayl.mp3",
+  "audio/Nikow - Бальзам.mp3",
+  "audio/temstime - Ти лиха.mp3",
+  "audio/Nikow - як я цьому посприяв .mp3"
+];
+

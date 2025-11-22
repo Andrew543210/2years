@@ -53,3 +53,10 @@ loadPartial('our-vibes-root', 'partials/our-vibes.html', `<section class='our-vi
     initOurVibes(vibes);
   })
   .catch(e => console.warn('our-vibes.js import error', e));
+
+// Завантажити музичний плеєр
+loadPartial('music-player-root', 'partials/music-player.html', `<section class='music-player'><div>Музичний плеєр недоступний</div></section>`)
+  .then(() => {
+    import('./partials/music-player.js').catch(e => console.warn('music-player.js import error', e));
+  });
+
