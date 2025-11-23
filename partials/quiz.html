@@ -1,0 +1,381 @@
+<!-- quiz.html (partial) — інтерактивна вікторина -->
+<section class="quiz" aria-label="Вікторина про наші стосунки">
+  <div class="quiz__container">
+    <h2 class="quiz__title">Вікторина про нас 💕</h2>
+    
+    <div class="quiz__question-container">
+      <div class="quiz__progress">
+        Питання <span class="quiz__current">1</span> з <span class="quiz__total">10</span>
+      </div>
+      
+      <h3 class="quiz__question-text"></h3>
+      
+      <form class="quiz__answers">
+        <label class="quiz__answer">
+          <input type="radio" name="answer" value="0">
+          <span class="quiz__answer-text"></span>
+        </label>
+        <label class="quiz__answer">
+          <input type="radio" name="answer" value="1">
+          <span class="quiz__answer-text"></span>
+        </label>
+        <label class="quiz__answer">
+          <input type="radio" name="answer" value="2">
+          <span class="quiz__answer-text"></span>
+        </label>
+        <label class="quiz__answer">
+          <input type="radio" name="answer" value="3">
+          <span class="quiz__answer-text"></span>
+        </label>
+      </form>
+      
+      <button class="quiz__submit" disabled>Підтвердити</button>
+    </div>
+  </div>
+
+  <!-- Модальне вікно результатів -->
+  <div class="quiz__modal" aria-hidden="true">
+    <div class="quiz__modal-content">
+      <h2 class="quiz__modal-title">Результати вікторини</h2>
+      <p class="quiz__modal-message"></p>
+      <p class="quiz__modal-score"></p>
+      <button class="quiz__modal-close">Закрити</button>
+    </div>
+  </div>
+
+  <style>
+    :root {
+      --quiz-accent: #ec4899;
+      --quiz-accent-light: #fce7f3;
+      --quiz-bg: #fff;
+      --quiz-text: #1f2937;
+      --quiz-border: #e5e7eb;
+      --quiz-success: #10b981;
+      --quiz-radius: 16px;
+    }
+
+    .quiz {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding: clamp(2rem, 4vw, 4rem) 1rem;
+      background: linear-gradient(135deg, #fef3f9 0%, #f0f9ff 100%);
+    }
+
+    .quiz__container {
+      width: 100%;
+      max-width: 700px;
+      background: var(--quiz-bg);
+      border-radius: var(--quiz-radius);
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    }
+
+    .quiz__title {
+      text-align: center;
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      color: var(--quiz-accent);
+      margin: 0 0 2rem 0;
+      font-weight: 700;
+    }
+
+    .quiz__progress {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+
+    .quiz__current,
+    .quiz__total {
+      color: var(--quiz-accent);
+      font-weight: 700;
+    }
+
+    .quiz__question-text {
+      font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+      color: var(--quiz-text);
+      margin: 0 0 1.5rem 0;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .quiz__answers {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .quiz__answer {
+      display: flex;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      border: 2px solid var(--quiz-border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #fff;
+    }
+
+    .quiz__answer:hover {
+      border-color: var(--quiz-accent);
+      background: var(--quiz-accent-light);
+    }
+
+    .quiz__answer input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      margin: 0;
+      margin-right: 1rem;
+      cursor: pointer;
+      accent-color: var(--quiz-accent);
+    }
+
+    .quiz__answer input[type="radio"]:checked + .quiz__answer-text {
+      font-weight: 600;
+      color: var(--quiz-accent);
+    }
+
+    .quiz__answer-text {
+      font-size: 1rem;
+      color: var(--quiz-text);
+      line-height: 1.4;
+    }
+
+    .quiz__submit {
+      width: 100%;
+      padding: 0.95rem 2rem;
+      background: var(--quiz-accent);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .quiz__submit:hover:not(:disabled) {
+      background: #db2777;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+    }
+
+    .quiz__submit:disabled {
+      background: #d1d5db;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    /* Модальне вікно */
+    .quiz__modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(4px);
+    }
+
+    .quiz__modal[aria-hidden="false"] {
+      display: flex;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .quiz__modal-content {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { 
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to { 
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .quiz__modal-title {
+      font-size: clamp(1.5rem, 3vw, 1.85rem);
+      color: var(--quiz-accent);
+      margin: 0 0 1.5rem 0;
+      font-weight: 700;
+    }
+
+    .quiz__modal-message {
+      font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+      color: var(--quiz-text);
+      margin: 0 0 1rem 0;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    .quiz__modal-score {
+      font-size: clamp(2rem, 4vw, 2.5rem);
+      color: var(--quiz-accent);
+      font-weight: 700;
+      margin: 1.5rem 0;
+    }
+
+    .quiz__modal-close {
+      padding: 0.85rem 2.5rem;
+      background: var(--quiz-accent);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 1rem;
+    }
+
+    .quiz__modal-close:hover {
+      background: #db2777;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(236, 72, 153, 0.3);
+    }
+
+    /* Анімація переходу між питаннями */
+    .quiz__question-container.fade-out {
+      animation: fadeOut 0.3s ease;
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; transform: translateX(0); }
+      to { opacity: 0; transform: translateX(-20px); }
+    }
+
+    .quiz__question-container.fade-in {
+      animation: fadeInQuestion 0.3s ease;
+    }
+
+    @keyframes fadeInQuestion {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Responsive для планшетів */
+    @media (max-width: 768px) {
+      .quiz {
+        padding: clamp(1.5rem, 3vw, 3rem) 1rem;
+      }
+
+      .quiz__container {
+        padding: clamp(1.25rem, 2.5vw, 2rem);
+      }
+
+      .quiz__title {
+        font-size: clamp(1.35rem, 3vw, 1.75rem);
+        margin-bottom: 1.5rem;
+      }
+
+      .quiz__question-text {
+        font-size: clamp(1rem, 2vw, 1.2rem);
+      }
+    }
+
+    /* Responsive для мобільних */
+    @media (max-width: 640px) {
+      .quiz__answer {
+        padding: 0.75rem 0.95rem;
+      }
+
+      .quiz__answer input[type="radio"] {
+        width: 18px;
+        height: 18px;
+        margin-right: 0.85rem;
+      }
+
+      .quiz__answer-text {
+        font-size: 0.95rem;
+      }
+
+      .quiz__submit {
+        padding: 0.85rem 1.5rem;
+        font-size: 1rem;
+      }
+
+      .quiz__modal-content {
+        padding: 2rem 1.25rem;
+        width: 92%;
+      }
+
+      .quiz__modal-title {
+        font-size: clamp(1.35rem, 2.5vw, 1.65rem);
+      }
+
+      .quiz__modal-message {
+        font-size: clamp(1rem, 2vw, 1.2rem);
+      }
+
+      .quiz__modal-score {
+        font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+      }
+
+      .quiz__modal-close {
+        padding: 0.75rem 2rem;
+        font-size: 0.95rem;
+      }
+    }
+
+    /* Додаткова адаптація для дуже малих екранів */
+    @media (max-width: 400px) {
+      .quiz__container {
+        padding: 1rem;
+      }
+
+      .quiz__progress {
+        font-size: 0.85rem;
+      }
+
+      .quiz__answer {
+        padding: 0.65rem 0.85rem;
+      }
+
+      .quiz__answer input[type="radio"] {
+        width: 16px;
+        height: 16px;
+        margin-right: 0.75rem;
+      }
+
+      .quiz__answer-text {
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Анімації відключаються при prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      .quiz__modal,
+      .quiz__modal-content,
+      .quiz__question-container,
+      .quiz__submit {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+
+  <script src="partials/quiz.js"></script>
+</section>

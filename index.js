@@ -60,3 +60,9 @@ loadPartial('music-player-root', 'partials/music-player.html', `<section class='
     import('./partials/music-player.js').catch(e => console.warn('music-player.js import error', e));
   });
 
+// Завантажити вікторину
+loadPartial('quiz-root', 'partials/quiz.html', `<section class='quiz'><div>Вікторина недоступна</div></section>`)
+  .then(() => {
+    import('./partials/quiz.js').catch(e => console.warn('quiz.js import error', e));
+  });
+
