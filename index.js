@@ -66,3 +66,13 @@ loadPartial('quiz-root', 'partials/quiz.html', `<section class='quiz'><div>Ві�
     import('./partials/quiz.js').catch(e => console.warn('quiz.js import error', e));
   });
 
+// Завантажити memories (карусель спогадів)
+loadPartial('memories-root', 'partials/memories.html', `<section class='memories'><div>Спогади недоступні</div></section>`)
+  .then(() => {
+    return import('./partials/memories.js');
+  })
+  .then(({ legendary, initMemories }) => {
+    initMemories(legendary);
+  })
+  .catch(e => console.warn('memories.js import error', e));
+
