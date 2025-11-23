@@ -76,3 +76,8 @@ loadPartial('memories-root', 'partials/memories.html', `<section class='memories
   })
   .catch(e => console.warn('memories.js import error', e));
 
+// Завантажити wishes (календар побажань)
+loadPartial('wishes-root', 'partials/wishes.html', `<section class='wishes'><div>Побажання недоступні</div></section>`)
+  .then(() => {
+    import('./partials/wishes.js').catch(e => console.warn('wishes.js import error', e));
+  });
