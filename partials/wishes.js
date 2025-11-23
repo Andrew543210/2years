@@ -15,33 +15,8 @@ import { wishes } from '../data.js';
     return;
   }
 
-  // Стан відкритих ячейок (зберігаємо в localStorage)
-  const STORAGE_KEY = 'wishes_revealed';
-  let revealedCells = loadRevealedState();
-
-  /**
-   * Завантажує стан відкритих ячейок з localStorage
-   */
-  function loadRevealedState() {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      return saved ? JSON.parse(saved) : [];
-    } catch (error) {
-      console.error('Error loading revealed state:', error);
-      return [];
-    }
-  }
-
-  /**
-   * Зберігає стан відкритих ячейок в localStorage
-   */
-  function saveRevealedState() {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(revealedCells));
-    } catch (error) {
-      console.error('Error saving revealed state:', error);
-    }
-  }
+  // Стан відкритих ячейок (тепер скидається при оновленні сторінки)
+  let revealedCells = [];
 
   /**
    * Створює сітку календаря з ячейками
@@ -82,7 +57,6 @@ import { wishes } from '../data.js';
 
     // Додаємо індекс до відкритих
     revealedCells.push(index);
-    saveRevealedState();
 
     // Додаємо клас з анімацією
     cell.classList.add('is-revealed');
@@ -140,9 +114,6 @@ import { wishes } from '../data.js';
    */
   window.resetWishes = function() {
     if (confirm('Скинути всі відкриті побажання?')) {
-      revealedCells = [];
-      saveRevealedState();
-      
       // Перезавантажуємо сторінку для чистого стану
       location.reload();
     }
