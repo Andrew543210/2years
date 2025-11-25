@@ -81,3 +81,9 @@ loadPartial('wishes-root', 'partials/wishes.html', `<section class='wishes'><div
   .then(() => {
     import('./partials/wishes.js').catch(e => console.warn('wishes.js import error', e));
   });
+
+// Завантажити to-new-memories (фінальний блок)
+loadPartial('to-new-memories-root', 'partials/to-new-memories.html', `<section class='to-new-memories'><div>До нових спогадів</div></section>`)
+  .then(() => {
+    import('./partials/to-new-memories.js').catch(e => console.warn('to-new-memories.js import error', e));
+  });
