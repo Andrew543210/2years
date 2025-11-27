@@ -95,7 +95,7 @@ a:focus{ outline: 3px solid rgba(21,156,228,0.18); outline-offset:3px; }
 
 .music-player__progress {
   height: 100%;
-  background: rgba(211,47,47,0.8); /* червона зі прозорістю 0.8 */
+  background: rgba(236,72,153,0.8); /* рожева зі прозорістю 0.8 */
   width: 0%;
   transition: width 0.12s linear;
 }
@@ -114,8 +114,8 @@ a:focus{ outline: 3px solid rgba(21,156,228,0.18); outline-offset:3px; }
 .music-player__btn--prev svg,
 .music-player__btn--next svg { width: 34px; height: 34px; color: #333; }
 
-/* Play button — червоно-біла */
-.music-player__btn--play { width: 44px; height: 44px; display:inline-grid; place-items:center; border-radius:50%; background:#fff; border:2px solid #d32f2f; }
+/* Play button — рожево-біла */
+.music-player__btn--play { width: 44px; height: 44px; display:inline-grid; place-items:center; border-radius:50%; background:#fff; border:2px solid #ec4899; }
 .music-player__btn--play svg { width: 28px; height: 28px; }
 
 .music-player__btn--play:active { transform: scale(0.98); }

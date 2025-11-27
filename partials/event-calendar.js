@@ -111,7 +111,6 @@ export function initEventCalendar(items) {
     if (currentPage < totalPages - 1) {
       currentPage++;
       renderPage();
-      GRID.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 
@@ -119,7 +118,6 @@ export function initEventCalendar(items) {
     if (currentPage > 0) {
       currentPage--;
       renderPage();
-      GRID.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
 

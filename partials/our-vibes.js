@@ -55,6 +55,12 @@ export function initOurVibes(items){
     const wrapper = document.createElement('div');
     wrapper.className = 'our-vibes__fs-wrapper';
 
+    // Додаємо кнопку закриття
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'our-vibes__fs-close';
+    closeBtn.setAttribute('aria-label', 'Закрити відео');
+    closeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
+
     const video = document.createElement('video');
     video.className = 'our-vibes__fs-video';
     video.src = src;
@@ -64,6 +70,7 @@ export function initOurVibes(items){
     video.playsInline = true;
     video.currentTime = 0;
 
+    wrapper.appendChild(closeBtn);
     wrapper.appendChild(video);
     document.body.appendChild(wrapper);
 
@@ -85,15 +92,18 @@ export function initOurVibes(items){
       document.removeEventListener('keydown', onKey);
       wrapper.removeEventListener('click', onWrapperClick);
       document.removeEventListener('fullscreenchange', onFSChange);
+      closeBtn.removeEventListener('click', onCloseClick);
     }
 
     function onKey(e){ if(e.key === 'Escape') cleanup(); }
     function onWrapperClick(e){ if(e.target === wrapper) cleanup(); }
     function onFSChange(){ if(!document.fullscreenElement) cleanup(); }
+    function onCloseClick(e){ e.stopPropagation(); cleanup(); }
 
     document.addEventListener('keydown', onKey);
     wrapper.addEventListener('click', onWrapperClick);
     document.addEventListener('fullscreenchange', onFSChange);
+    closeBtn.addEventListener('click', onCloseClick);
   }
 
   // Очищуємо і рендеримо список
